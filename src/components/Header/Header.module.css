@@ -1,0 +1,232 @@
+.header {
+  padding-top: 50px;
+  padding-left: max(16px, calc(50% - 1160px / 2));
+  padding-right: max(16px, calc(50% - 1160px / 2));
+  position: relative;
+  z-index: 50;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.logoLink {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.logo {
+  display: block;
+  width: 220px;
+  height: auto;
+  max-width: 100%;
+}
+
+.tagline {
+  width: 327px;
+  opacity: 0.5;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+  margin: 0;
+}
+
+.loginButton {
+  width: 103px;
+  height: 52px;
+  padding: 16px 26px;
+  background: #bcec30;
+  border: none;
+  border-radius: 46px;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.loginButton:hover {
+  background: #c6ff00;
+}
+
+.loginButton:active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.userMenuWrapper {
+  position: relative;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #000000;
+}
+
+.userIcon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.userName {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 110%;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userArrow {
+  width: 12px;
+  height: 8px;
+  display: block;
+}
+
+.userMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 54px);
+  width: 266px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.userMenuName {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+  color: #000000;
+}
+
+.userMenuEmail {
+  margin: 10px 0 34px;
+  color: #999999;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+}
+
+.userMenuPrimary {
+  width: 206px;
+  height: 52px;
+  padding: 16px 26px;
+  border-radius: 46px;
+  background: #bcec30;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.userMenuPrimary:hover {
+  background: #c6ff00;
+}
+
+.userMenuPrimary:active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.userMenuSecondary {
+  width: 206px;
+  height: 52px;
+  margin-top: 10px;
+  padding: 16px 26px;
+  border-radius: 46px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+  color: #000000;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.userMenuSecondary:hover {
+  background: #f7f7f7;
+}
+
+.userMenuSecondary:active {
+  background: #e9eced;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-top: 40px;
+  }
+
+  .container {
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .loginButton {
+    width: 83px;
+    height: 36px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .userName {
+    display: none;
+  }
+
+  .userArrow {
+    display: none;
+  }
+
+  .userIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .userMenu {
+    top: calc(100% + 16px);
+    width: min(266px, calc(100vw - 32px));
+  }
+}

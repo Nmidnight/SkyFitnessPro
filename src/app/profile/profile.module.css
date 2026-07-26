@@ -1,0 +1,281 @@
+.page {
+  padding-left: max(16px, calc(50% - 1160px / 2));
+  padding-right: max(16px, calc(50% - 1160px / 2));
+  padding-bottom: 80px;
+  margin-top: 40px;
+}
+
+.title {
+  margin: 0 0 40px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 110%;
+}
+
+.loading,
+.empty {
+  font-size: 18px;
+  color: #999999;
+}
+
+.profileCard {
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);
+  width: 100%;
+  max-width: 1160px;
+  min-height: 257px;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 33px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 500;
+  color: #999999;
+  flex-shrink: 0;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileName {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.profileLogin {
+  margin: 30px 0 24px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 110%;
+}
+
+.profileActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.editButton,
+.logoutButton {
+  min-width: 192px;
+  height: 52px;
+  padding: 16px 26px;
+  border-radius: 46px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.editButton:hover,
+.logoutButton:hover {
+  background: #f7f7f7;
+}
+
+.editButton:active,
+.logoutButton:active {
+  background: #e9eced;
+}
+
+.coursesSection {
+  margin-top: 60px;
+}
+
+.sectionTitle {
+  margin: 0 0 40px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 110%;
+}
+
+.coursesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 360px);
+  gap: 40px;
+}
+
+.courseCard {
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);
+  overflow: hidden;
+  padding-bottom: 24px;
+}
+
+.courseImageWrapper {
+  position: relative;
+}
+
+.courseImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.courseRemove {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.courseRemove::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 40px;
+  right: -6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid #d0cece;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.courseRemove:hover::after {
+  opacity: 1;
+}
+
+.courseContent {
+  padding: 24px;
+}
+
+.courseTitle {
+  margin: 0 0 20px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.courseMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 50px;
+  background: #f7f7f7;
+  font-size: 16px;
+  color: #202020;
+  white-space: nowrap;
+}
+
+.progressRow {
+  margin-top: 20px;
+}
+
+.progressLabel {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: #d9d9d9;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  background: #00c1ff;
+}
+
+.courseAction {
+  margin-top: 30px;
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 46px;
+  background: #bcec30;
+  font-size: 18px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.courseAction:hover {
+  background: #c6ff00;
+}
+
+.courseAction:active {
+  background: #000000;
+  color: #ffffff;
+}
+
+@media (max-width: 1200px) {
+  .coursesGrid {
+    grid-template-columns: repeat(2, minmax(280px, 360px));
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .title,
+  .sectionTitle {
+    font-size: 32px;
+  }
+
+  .profileCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profileActions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .editButton,
+  .logoutButton {
+    width: 100%;
+  }
+
+  .coursesGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .courseTitle {
+    font-size: 24px;
+  }
+}
