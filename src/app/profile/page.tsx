@@ -216,6 +216,9 @@ export default function ProfilePage() {
                       alt={card.course.nameRU}
                       width={360}
                       height={325}
+                      sizes="360px"
+                      quality={100}
+                      unoptimized
                       className={styles.courseImage}
                     />
                     <button

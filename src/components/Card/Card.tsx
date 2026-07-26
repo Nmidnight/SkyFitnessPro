@@ -48,6 +48,9 @@ export default function Card({ course }: CardProps) {
           alt={course.nameRU}
           width={360}
           height={325}
+          sizes="360px"
+          quality={100}
+          unoptimized
           className={styles.image}
         />
         <button

@@ -10,12 +10,12 @@ import {
 import type { Course } from '@/types';
 import styles from './CoursePage.module.css';
 
-const courseImages: Record<string, string> = {
-  Yoga: '/images/yoga.png',
-  Stretching: '/images/stretching.png',
-  Fitness: '/images/fitness.png',
-  StepAirobic: '/images/step-aerobics.png',
-  BodyFlex: '/images/bodyflex.png',
+const courseHeroImages: Record<string, string> = {
+  Yoga: '/images/course/yoga-hero.png',
+  Stretching: '/images/course/stretching-hero.png',
+  Fitness: '/images/course/fitness-hero.png',
+  StepAirobic: '/images/course/step-aerobics-hero.png',
+  BodyFlex: '/images/course/bodyflex-hero.png',
 };
 
 type CoursePageProps = {
@@ -35,7 +35,8 @@ export default function CoursePageView({ course }: CoursePageProps) {
   const [isPending, setIsPending] = useState(false);
 
   const isInProfile = Boolean(user?.selectedCourses?.includes(course._id));
-  const heroSrc = courseImages[course.nameEN] ?? '/images/yoga.png';
+  const heroSrc =
+    courseHeroImages[course.nameEN] ?? '/images/course/yoga-hero.png';
   const suitability = course.fitting.slice(0, 3);
   const directions = course.directions;
   const benefits =
@@ -75,12 +76,15 @@ export default function CoursePageView({ course }: CoursePageProps) {
       <section className={styles.hero}>
         <Image
           src={heroSrc}
-          alt={course.nameRU}
+          alt=""
           fill
+          sizes="(max-width: 1200px) 100vw, 1160px"
+          quality={100}
+          unoptimized
           className={styles.heroImage}
           priority
         />
-        <h1 className={styles.heroTitle}>{course.nameRU}</h1>
+        <h1 className={styles.srOnly}>{course.nameRU}</h1>
       </section>
 
       {suitability.length > 0 && (
@@ -143,6 +147,8 @@ export default function CoursePageView({ course }: CoursePageProps) {
             alt=""
             width={520}
             height={370}
+            quality={100}
+            unoptimized
             className={styles.promoSwoosh}
           />
           <Image
@@ -150,6 +156,8 @@ export default function CoursePageView({ course }: CoursePageProps) {
             alt=""
             width={360}
             height={400}
+            quality={100}
+            unoptimized
             className={styles.promoMan}
           />
         </div>
