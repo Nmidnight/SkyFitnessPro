@@ -19,6 +19,10 @@
   object-position: center top;
 }
 
+.heroImageMobile {
+  display: none;
+}
+
 .srOnly {
   position: absolute;
   width: 1px;
@@ -190,25 +194,39 @@
 }
 
 .promoDecor {
-  position: relative;
-  width: 480px;
-  height: 420px;
-  flex-shrink: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.promoSwooshClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
 
 .promoSwoosh {
   position: absolute;
-  right: -40px;
-  top: 40px;
-  width: 420px;
+  right: -20px;
+  bottom: -126px;
+  width: 670px;
   height: auto;
 }
 
 .promoMan {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 340px;
+  right: 30px;
+  bottom: 17px;
+  width: 349px;
+  height: auto;
+}
+
+.promoStrip {
+  position: absolute;
+  right: 374px;
+  top: 32px;
+  width: 54px;
   height: auto;
 }
 
@@ -225,20 +243,31 @@
   }
 
   .promo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .promoDecor {
-    width: 100%;
-    height: 280px;
+    min-height: 486px;
   }
 }
 
 @media (max-width: 768px) {
+  .page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .hero {
     margin-top: 40px;
+    width: 100%;
+    max-width: 343px;
     height: 325px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .heroImageDesktop {
+    display: none;
+  }
+
+  .heroImageMobile {
+    display: block;
   }
 
   .sectionTitle {
@@ -261,9 +290,26 @@
   }
 
   .promo {
-    margin-top: 60px;
+    margin-top: 156px;
     padding: 30px;
-    min-height: auto;
+    min-height: 412px;
+    overflow: visible;
+  }
+
+  .promoDecor {
+    z-index: 0;
+  }
+
+  .promoSwooshClip {
+    top: -156px;
+    left: -16px;
+    right: -16px;
+    height: 220px;
+    overflow: visible;
+  }
+
+  .promoContent {
+    max-width: 100%;
   }
 
   .promoTitle {
@@ -279,7 +325,23 @@
     max-width: 100%;
   }
 
-  .promoDecor {
-    display: none;
+  .promoSwoosh {
+    width: 520px;
+    right: -80px;
+    top: -2px;
+    bottom: auto;
+  }
+
+  .promoMan {
+    width: 334px;
+    right: -75px;
+    top: -257px;
+    bottom: auto;
+  }
+
+  .promoStrip {
+    width: 34px;
+    right: 142px;
+    top: -177px;
   }
 }

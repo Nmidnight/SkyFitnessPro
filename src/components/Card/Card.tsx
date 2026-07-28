@@ -41,7 +41,7 @@ export default function Card({ course }: CardProps) {
   const tooltip = isAdded ? 'Удалить курс' : 'Добавить курс';
 
   return (
-    <Link href={`/course/${course._id}`} className={styles.card}>
+    <Link href={`/course/${course._id}`} className={styles.card} prefetch={false}>
       <div className={styles.imageWrapper}>
         <Image
           src={imageSrc}

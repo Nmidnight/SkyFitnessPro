@@ -18,6 +18,15 @@ const courseHeroImages: Record<string, string> = {
   BodyFlex: '/images/course/bodyflex-hero.png',
 };
 
+/** Mobile: вертикальные/карточные баннеры, чтобы hero не «пропадал» */
+const courseHeroImagesMobile: Record<string, string> = {
+  Yoga: '/images/course/yoga-hero-mobile.png',
+  Stretching: '/images/stretching.png',
+  Fitness: '/images/fitness.png',
+  StepAirobic: '/images/step-aerobics.png',
+  BodyFlex: '/images/bodyflex.png',
+};
+
 type CoursePageProps = {
   course: Course;
 };
@@ -37,6 +46,8 @@ export default function CoursePageView({ course }: CoursePageProps) {
   const isInProfile = Boolean(user?.selectedCourses?.includes(course._id));
   const heroSrc =
     courseHeroImages[course.nameEN] ?? '/images/course/yoga-hero.png';
+  const heroSrcMobile =
+    courseHeroImagesMobile[course.nameEN] ?? '/images/yoga.png';
   const suitability = course.fitting.slice(0, 3);
   const directions = course.directions;
   const benefits =
@@ -78,10 +89,20 @@ export default function CoursePageView({ course }: CoursePageProps) {
           src={heroSrc}
           alt=""
           fill
-          sizes="(max-width: 1200px) 100vw, 1160px"
+          sizes="(max-width: 768px) 100vw, 1160px"
           quality={100}
           unoptimized
-          className={styles.heroImage}
+          className={`${styles.heroImage} ${styles.heroImageDesktop}`}
+          priority
+        />
+        <Image
+          src={heroSrcMobile}
+          alt=""
+          fill
+          sizes="100vw"
+          quality={100}
+          unoptimized
+          className={`${styles.heroImage} ${styles.heroImageMobile}`}
           priority
         />
         <h1 className={styles.srOnly}>{course.nameRU}</h1>
@@ -122,6 +143,36 @@ export default function CoursePageView({ course }: CoursePageProps) {
       )}
 
       <section className={styles.promo}>
+        <div className={styles.promoDecor} aria-hidden>
+          <div className={styles.promoSwooshClip}>
+            <Image
+              src="/images/course/course-swoosh.png"
+              alt=""
+              width={520}
+              height={370}
+              quality={100}
+              unoptimized
+              className={styles.promoSwoosh}
+            />
+          </div>
+          <Image
+            src="/images/course/course-man.png"
+            alt=""
+            width={360}
+            height={400}
+            quality={100}
+            unoptimized
+            className={styles.promoMan}
+          />
+          <Image
+            src="/images/course/BlackStrip.png"
+            alt=""
+            width={54}
+            height={47}
+            unoptimized
+            className={styles.promoStrip}
+          />
+        </div>
         <div className={styles.promoContent}>
           <h2 className={styles.promoTitle}>
             Начните путь
@@ -140,26 +191,6 @@ export default function CoursePageView({ course }: CoursePageProps) {
           >
             {buttonLabel}
           </button>
-        </div>
-        <div className={styles.promoDecor} aria-hidden>
-          <Image
-            src="/images/course/course-swoosh.png"
-            alt=""
-            width={520}
-            height={370}
-            quality={100}
-            unoptimized
-            className={styles.promoSwoosh}
-          />
-          <Image
-            src="/images/course/course-man.png"
-            alt=""
-            width={360}
-            height={400}
-            quality={100}
-            unoptimized
-            className={styles.promoMan}
-          />
         </div>
       </section>
     </main>

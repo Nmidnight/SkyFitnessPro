@@ -17,7 +17,11 @@ import {
   getCourseProgress,
   getCourseWorkouts,
 } from '@/services/workoutsService';
-import type { Course, CourseProgress, Workout } from '@/types';
+import type { Course, Workout } from '@/types';
+import {
+  calcCourseProgressPercent,
+  getCompletedWorkoutIds,
+} from '@/utils/courseProgress';
 import styles from './profile.module.css';
 
 const courseImages: Record<string, string> = {
@@ -33,21 +37,6 @@ type ProfileCourseCard = {
   progress: number;
   completedWorkoutIds: string[];
 };
-
-function calcProgress(progress?: CourseProgress): {
-  percent: number;
-  completedIds: string[];
-} {
-  const workouts = progress?.workoutsProgress ?? [];
-  if (!workouts.length) {
-    return { percent: 0, completedIds: [] };
-  }
-  const completedIds = workouts
-    .filter((item) => item.workoutCompleted)
-    .map((item) => item.workoutId);
-  const percent = Math.round((completedIds.length / workouts.length) * 100);
-  return { percent, completedIds };
-}
 
 function actionLabel(progress: number): string {
   if (progress >= 100) return 'Начать заново';
@@ -90,8 +79,11 @@ export default function ProfilePage() {
         selected.map(async (course) => {
           try {
             const progress = await getCourseProgress(course._id);
-            const { percent, completedIds: done } = calcProgress(progress);
-            return { course, progress: percent, completedWorkoutIds: done };
+            const percent = calcCourseProgressPercent(course, progress);
+            const completedWorkoutIds = (progress.workoutsProgress ?? [])
+              .filter((item) => item.workoutCompleted)
+              .map((item) => String(item.workoutId));
+            return { course, progress: percent, completedWorkoutIds };
           } catch {
             return { course, progress: 0, completedWorkoutIds: [] };
           }
@@ -113,11 +105,14 @@ export default function ProfilePage() {
 
   const userName = user?.email ? user.email.split('@')[0] || '' : '';
 
-  const openWorkouts = async (courseId: string, doneIds: string[]) => {
+  const openWorkouts = async (courseId: string) => {
     try {
-      const list = await getCourseWorkouts(courseId);
+      const [list, progress] = await Promise.all([
+        getCourseWorkouts(courseId),
+        getCourseProgress(courseId),
+      ]);
       setWorkouts(list);
-      setCompletedIds(doneIds);
+      setCompletedIds(getCompletedWorkoutIds(list, progress));
       setActiveCourseId(courseId);
     } catch {
       // ignore
@@ -144,7 +139,7 @@ export default function ProfilePage() {
       }
       return;
     }
-    await openWorkouts(card.course._id, card.completedWorkoutIds);
+    await openWorkouts(card.course._id);
   };
 
   if (isLoading || !user) {

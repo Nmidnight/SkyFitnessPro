@@ -40,31 +40,41 @@
 .item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
-  padding: 16px 18px;
+  padding: 12px 8px;
   border-radius: 14px;
-  background: #f7f7f7;
   font-size: 18px;
   line-height: 110%;
   transition: background 0.2s ease;
 }
 
 .item:hover {
-  background: #ececec;
+  background: #f7f7f7;
 }
 
-.itemDone {
-  background: #edf9d3;
+.itemIcon {
+  display: flex;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
 .itemName {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+  color: #000000;
 }
 
-.check {
-  color: #bcec30;
-  font-weight: 700;
-  flex-shrink: 0;
+.itemSubtitle {
+  font-size: 14px;
+  color: #999999;
 }
