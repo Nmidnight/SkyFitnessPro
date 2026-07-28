@@ -7,8 +7,20 @@ import type {
   WorkoutProgress,
 } from '@/types';
 
-export function getCourseWorkouts(courseId: string): Promise<Workout[]> {
-  return apiRequest<Workout[]>(`/courses/${courseId}/workouts`);
+export async function getCourseWorkouts(courseId: string): Promise<Workout[]> {
+  const data = await apiRequest<Workout[] | { workouts: Workout[] }>(
+    `/courses/${courseId}/workouts`,
+  );
+
+  if (Array.isArray(data)) {
+    return data;
+  }
+
+  if (data && typeof data === 'object' && Array.isArray(data.workouts)) {
+    return data.workouts;
+  }
+
+  return [];
 }
 
 export function getWorkoutById(workoutId: string): Promise<Workout> {
@@ -19,13 +31,19 @@ export async function getCourseProgress(
   courseId: string,
 ): Promise<CourseProgress> {
   const data = await apiRequest<
-    CourseProgress & { workoutsProgress?: WorkoutProgress[] }
+    | (CourseProgress & { workoutsProgress?: WorkoutProgress[] })
+    | { progress: CourseProgress }
   >(`/users/me/progress?courseId=${courseId}`);
 
+  const progress =
+    data && typeof data === 'object' && 'progress' in data
+      ? data.progress
+      : data;
+
   return {
-    courseId: data.courseId ?? courseId,
-    courseCompleted: Boolean(data.courseCompleted),
-    workoutsProgress: data.workoutsProgress ?? [],
+    courseId: progress.courseId ?? courseId,
+    courseCompleted: Boolean(progress.courseCompleted),
+    workoutsProgress: progress.workoutsProgress ?? [],
   };
 }
 

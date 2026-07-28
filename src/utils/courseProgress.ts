@@ -12,7 +12,8 @@ function isWorkoutDone(
   }
 
   return workout.exercises.every(
-    (exercise, index) => (progress.progressData[index] ?? 0) >= exercise.quantity,
+    (exercise, index) =>
+      (progress.progressData[index] ?? 0) >= exercise.quantity,
   );
 }
 
@@ -29,7 +30,7 @@ export function getCompletedWorkoutIds(
 
   return workouts
     .filter((workout) => isWorkoutDone(workout, byId.get(String(workout._id))))
-    .map((workout) => workout._id);
+    .map((workout) => String(workout._id));
 }
 
 export function calcCourseProgressPercent(
@@ -39,8 +40,15 @@ export function calcCourseProgressPercent(
   const total = course.workouts?.length ?? 0;
   if (!total) return 0;
 
-  const completed = (progress?.workoutsProgress ?? []).filter(
-    (item) => item.workoutCompleted,
+  const completedIds = new Set(
+    (progress?.workoutsProgress ?? [])
+      .filter((item) => item.workoutCompleted)
+      .map((item) => String(item.workoutId)),
+  );
+
+  // Считаем только тренировки этого курса из полного списка course.workouts
+  const completed = course.workouts.filter((id) =>
+    completedIds.has(String(id)),
   ).length;
 
   return Math.round((completed / total) * 100);

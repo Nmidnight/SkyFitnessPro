@@ -142,7 +142,7 @@ export default function CoursePageView({ course }: CoursePageProps) {
         </section>
       )}
 
-      <section className={styles.promo}>
+      <section className={styles.promoWrapper}>
         <div className={styles.promoDecor} aria-hidden>
           <div className={styles.promoSwooshClip}>
             <Image
@@ -173,24 +173,26 @@ export default function CoursePageView({ course }: CoursePageProps) {
             className={styles.promoStrip}
           />
         </div>
-        <div className={styles.promoContent}>
-          <h2 className={styles.promoTitle}>
-            Начните путь
-            <br />к новому телу
-          </h2>
-          <ul className={styles.promoList}>
-            {benefits.map((benefit) => (
-              <li key={benefit}>{benefit}</li>
-            ))}
-          </ul>
-          <button
-            className={styles.promoButton}
-            type="button"
-            disabled={isPending}
-            onClick={handleAction}
-          >
-            {buttonLabel}
-          </button>
+        <div className={styles.promo}>
+          <div className={styles.promoContent}>
+            <h2 className={styles.promoTitle}>
+              Начните путь
+              <br />к новому телу
+            </h2>
+            <ul className={styles.promoList}>
+              {benefits.map((benefit) => (
+                <li key={benefit}>{benefit}</li>
+              ))}
+            </ul>
+            <button
+              className={styles.promoButton}
+              type="button"
+              disabled={isPending}
+              onClick={handleAction}
+            >
+              {buttonLabel}
+            </button>
+          </div>
         </div>
       </section>
     </main>

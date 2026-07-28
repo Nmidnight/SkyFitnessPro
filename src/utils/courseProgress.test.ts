@@ -54,4 +54,17 @@ describe('courseProgress', () => {
 
     expect(getCompletedWorkoutIds(workouts, progress)).toEqual(['w2']);
   });
+
+  it('ignores completed workouts that are not in the course list', () => {
+    const progress: CourseProgress = {
+      courseId: 'c1',
+      courseCompleted: false,
+      workoutsProgress: [
+        { workoutId: 'w1', workoutCompleted: true, progressData: [10] },
+        { workoutId: 'other', workoutCompleted: true, progressData: [10] },
+      ],
+    };
+
+    expect(calcCourseProgressPercent(course, progress)).toBe(20);
+  });
 });
